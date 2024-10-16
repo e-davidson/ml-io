@@ -12,6 +12,7 @@ if(@MLIO_STATIC_LIB@)
     find_dependency(natsort)
     find_dependency(Protobuf 3.8)
     find_dependency(TBB COMPONENTS tbb)
+    find_dependency(DPL COMPONENTS dpl)
     find_dependency(Threads)
     find_dependency(ZLIB)
 

@@ -17,7 +17,7 @@ ExternalProject_Add(
     GIT_REPOSITORY
         https://github.com/abseil/abseil-cpp.git
     GIT_TAG
-        20210324.2
+        20240722.0
     CMAKE_ARGS
         -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
         -DCMAKE_BUILD_TYPE=Release
@@ -36,7 +36,7 @@ ExternalProject_Add(
     GIT_REPOSITORY
         https://github.com/aws/aws-sdk-cpp.git
     GIT_TAG
-        1.7.290
+        1.11.424
     CMAKE_ARGS
         -DBUILD_ONLY=s3
         -DCPP_STANDARD=17
@@ -132,7 +132,7 @@ ExternalProject_Add(
     GIT_REPOSITORY
         https://github.com/google/protobuf.git
     GIT_TAG
-        v3.8.0
+        v21.12
     GIT_SHALLOW
         TRUE
     CONFIGURE_COMMAND
@@ -147,6 +147,9 @@ ExternalProject_Add(
         make install
     BUILD_IN_SOURCE
         TRUE
+    CMAKE_ARGS
+        -Bcmake-out
+        -DCMAKE_CXX_STANDARD=14
 )
 
 ExternalProject_Add(
@@ -157,7 +160,7 @@ ExternalProject_Add(
     GIT_REPOSITORY
         https://github.com/pybind/pybind11.git
     GIT_TAG
-        v2.4.2
+        v2.13.6
     GIT_SHALLOW
         TRUE
     CMAKE_ARGS
@@ -174,9 +177,29 @@ ExternalProject_Add(
     PREFIX
         ${CMAKE_CURRENT_BINARY_DIR}
     GIT_REPOSITORY
-        https://github.com/wjakob/tbb.git
+        https://github.com/oneapi-src/oneTBB.git
     GIT_TAG
-        ddbe45cd3ad89df9a84cd77013d5898fc48b8e89
+        v2021.13.0
+    PATCH_COMMAND 
+        git apply /tmp/mlio/tbb.patch
+    CMAKE_ARGS
+        -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+        -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
+        -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+        -DBUILD_SHARED_LIBS=OFF
+        -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+)
+
+ExternalProject_Add(
+    #NAME
+        dpl
+    PREFIX
+        ${CMAKE_CURRENT_BINARY_DIR}
+    GIT_REPOSITORY
+        https://github.com/oneapi-src/oneDPL.git
+    GIT_TAG
+        oneDPL-2022.0.0-release
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
         -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}

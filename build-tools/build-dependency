@@ -3,7 +3,7 @@
 set -o errexit
 
 declare -r _static_dependencies=(absl dlpack fmt gtest natsort pybind11)
-declare -r _shared_dependencies=(awssdk protobuf tbb)
+declare -r _shared_dependencies=(awssdk protobuf tbb dpl)
 
 function _print_usage
 {

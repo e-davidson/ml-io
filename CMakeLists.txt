@@ -283,6 +283,7 @@ if(MLIO_INCLUDE_LIB)
     find_package(natsort REQUIRED CONFIG)
     find_package(Protobuf 3.8 REQUIRED)
     find_package(TBB REQUIRED CONFIG COMPONENTS tbb)
+    find_package(DPL REQUIRED CONFIG COMPONENTS dpl)
     find_package(Threads REQUIRED)
     find_package(ZLIB REQUIRED)
 
